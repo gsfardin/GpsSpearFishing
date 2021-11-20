@@ -51,7 +51,6 @@ public class Dive {
 	@NotNull
 	@ManyToOne
 	private FishingPlace fishingPlace;
-	@NotNull
 	@OneToMany(mappedBy = "dive")
 	private List<Fisher> fishers = new ArrayList<>();
 	
