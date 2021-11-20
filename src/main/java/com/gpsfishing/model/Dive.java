@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gpsfishing.model.enums.BeaufortScale;
 import com.gpsfishing.model.enums.MoonPhase;
 import com.gpsfishing.model.enums.WindRose;
@@ -28,10 +31,13 @@ public class Dive {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@NotNull
+	@JsonFormat(pattern = "dd/mm/yyyy")
 	private Date dateDive;
 	@NotNull
+	@JsonFormat(pattern = "hh:mm")
 	private Timestamp initialDiveHour;
 	@NotNull
+	@JsonFormat(pattern = "hh:mm")
 	private Timestamp finalDiveHour;
 	@NotNull
 	private Integer visibility;
@@ -51,7 +57,7 @@ public class Dive {
 	@NotNull
 	@ManyToOne
 	private FishingPlace fishingPlace;
-	@OneToMany(mappedBy = "dive")
+	@OneToMany(mappedBy = "dive", cascade = CascadeType.ALL)
 	private List<Fisher> fishers = new ArrayList<>();
 	
 	public Dive() {}

@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.micronaut.core.annotation.Nullable;
 
 @Entity
@@ -25,8 +27,9 @@ public class FishProduction {
 	private Fisher fisher;
 	@NotNull
 	@ManyToOne
+	@JsonIgnore
 	private Fish fish;
-	@NotNull
+//	@NotNull
 	private Integer weigth;
 	@Nullable
 	@ManyToMany
@@ -83,15 +86,15 @@ public class FishProduction {
 		this.userSawns = userSawns;
 	}
 
-	public Integer getScore() {
-		if(weigth >= fish.getInitialScore()) {
-			if(userSawns.size() == 0) {
-				return weigth + CATCH_POINTS;
-			} else {
-				return weigth * (1 - (SAWN_PERCENT/100));
-			}
-		} else {
-			return 0;
-		}
-	}
+//	public Integer getScore() {
+//		if(weigth >= fish.getInitialScore()) {
+//			if(userSawns.size() == 0) {
+//				return weigth + CATCH_POINTS;
+//			} else {
+//				return weigth * (1 - (SAWN_PERCENT/100));
+//			}
+//		} else {
+//			return 0;
+//		}
+//	}
 }

@@ -2,13 +2,17 @@ package com.gpsfishing.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Fisher {
@@ -19,10 +23,11 @@ public class Fisher {
 	@NotNull
 	@ManyToOne
 	private User user;
-	@NotNull
+//	@NotNull
 	@ManyToOne
+	@JsonIgnore
 	private Dive dive;
-	@OneToMany(mappedBy = "fisher")
+	@OneToMany(mappedBy = "fisher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<FishProduction> fishProductions;
 	
 	public Fisher() {}
