@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: gpsSpearFishing
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/db_gps_spearfishing
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 'mysql'
+    schema-generate: CREATE_DROP
+    dialect: MYSQL
+#jpa.default.properties.hibernate.hbm2ddl.auto: update
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+    entity-scan:
+      packages: com.gpsfishing.model
