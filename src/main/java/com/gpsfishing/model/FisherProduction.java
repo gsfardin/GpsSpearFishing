@@ -19,8 +19,8 @@ import io.micronaut.core.annotation.Nullable;
 
 @Entity
 public class FisherProduction {
-	private static final Integer CATCH_POINTS = 1000;
-	private static final Integer SAWN_PERCENT = 30;
+//	private static final double CATCH_POINTS = 1000;
+//	private static final double SAWN_PERCENT = 0.30;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -97,6 +97,19 @@ public class FisherProduction {
 		return Objects.hash(id);
 	}
 
+//	public double getScore() {
+//		
+//		if(weigth >= fish.getInitialScore()) {
+//			if(userSawns.size() == 0) {
+//				return weigth + CATCH_POINTS;
+//			} else {
+//				return (weigth * (1 - SAWN_PERCENT)) + CATCH_POINTS;
+//			}
+//		} else {
+//			return 0;
+//		}
+//	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,18 +121,4 @@ public class FisherProduction {
 		FisherProduction other = (FisherProduction) obj;
 		return Objects.equals(id, other.id);
 	}
-
-//	public Integer getScore() {
-//		if(weigth >= fish.getInitialScore()) {
-//			if(userSawns.size() == 0) {
-//				return weigth + CATCH_POINTS;
-//			} else {
-//				return weigth * (1 - (SAWN_PERCENT/100));
-//			}
-//		} else {
-//			return 0;
-//		}
-//	}
-	
-	
 }

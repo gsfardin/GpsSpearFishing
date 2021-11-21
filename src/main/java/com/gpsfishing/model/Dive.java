@@ -53,6 +53,7 @@ public class Dive {
 	@NotNull
 	@Enumerated(EnumType.ORDINAL)
 	private WindRose seaDirection;
+	@Nullable
 	@Enumerated(EnumType.ORDINAL)
 	private BeaufortScale seaCondition;
 	@NotNull
