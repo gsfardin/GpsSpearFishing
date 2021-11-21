@@ -32,16 +32,16 @@ public class Fisher {
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "fisher", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	private List<FishProduction> fishProductions;
+	private List<FisherProduction> fisherProductions;
 	
 	public Fisher() {}
 
-	public Fisher(Long id, @NotNull User user, @NotNull Dive dive, List<FishProduction> fishProductions) {
+	public Fisher(Long id, @NotNull User user, @NotNull Dive dive, List<FisherProduction> fisherProductions) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.dive = dive;
-		this.fishProductions = fishProductions;
+		this.fisherProductions = fisherProductions;
 	}
 
 	public Long getId() {
@@ -68,12 +68,12 @@ public class Fisher {
 		this.dive = dive;
 	}
 
-	public List<FishProduction> getFishProductions() {
-		return fishProductions;
+	public List<FisherProduction> getFisherProductions() {
+		return fisherProductions;
 	}
 
-	public void setFishProductions(List<FishProduction> fishProductions) {
-		this.fishProductions = fishProductions;
+	public void setFisherProductions(List<FisherProduction> fisherProductions) {
+		this.fisherProductions = fisherProductions;
 	}
 
 	@Override

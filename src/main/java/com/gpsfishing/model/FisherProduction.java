@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.micronaut.core.annotation.Nullable;
 
 @Entity
-public class FishProduction {
+public class FisherProduction {
 	private static final Integer CATCH_POINTS = 1000;
 	private static final Integer SAWN_PERCENT = 30;
 
@@ -41,9 +41,9 @@ public class FishProduction {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<User> userSawns = new ArrayList<>();
 	
-	public FishProduction() {}
+	public FisherProduction() {}
 
-	public FishProduction(Long id, Fisher fisher, @NotNull Fish fish, @NotNull Integer weigth, List<User> userSawns) {
+	public FisherProduction(Long id, Fisher fisher, @NotNull Fish fish, @NotNull Integer weigth, List<User> userSawns) {
 		super();
 		this.id = id;
 		this.fisher = fisher;
@@ -105,7 +105,7 @@ public class FishProduction {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FishProduction other = (FishProduction) obj;
+		FisherProduction other = (FisherProduction) obj;
 		return Objects.equals(id, other.id);
 	}
 
