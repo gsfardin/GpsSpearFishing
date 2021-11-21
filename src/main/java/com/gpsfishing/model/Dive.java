@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gpsfishing.model.enums.BeaufortScale;
 import com.gpsfishing.model.enums.MoonPhase;
 import com.gpsfishing.model.enums.WindRose;
@@ -57,7 +58,9 @@ public class Dive {
 	@NotNull
 	@ManyToOne
 	private FishingPlace fishingPlace;
-	@OneToMany(mappedBy = "dive", cascade = CascadeType.ALL)
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "dive", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<Fisher> fishers = new ArrayList<>();
 	
 	public Dive() {}
@@ -176,12 +179,14 @@ public class Dive {
 	public void setFishers(List<Fisher> fishers) {
 		this.fishers = fishers;
 	}
-
-	@Override
-	public String toString() {
-		return "Dive [id=" + id + ", dateDive=" + dateDive + ", initialDiveHour=" + initialDiveHour + ", finalDiveHour="
-				+ finalDiveHour + ", visibility=" + visibility + ", temperatura=" + temperatura + ", moonPhase="
-				+ moonPhase + ", windDirection=" + windDirection + ", seaDirection=" + seaDirection + ", seaCondition="
-				+ seaCondition + ", fishingPlace=" + fishingPlace + ", fishers=" + fishers + "]";
+	
+	public void addFisher(Fisher fisher) {
+		fishers.add(fisher);
+		fisher.setDive(this);
+	}
+	
+	public void removeFisher(Fisher fisher) {
+		fishers.remove(fisher);
+		fisher.setDive(null);
 	}
 }

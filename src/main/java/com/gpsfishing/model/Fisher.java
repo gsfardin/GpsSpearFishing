@@ -1,6 +1,7 @@
 package com.gpsfishing.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Fisher {
@@ -23,11 +25,13 @@ public class Fisher {
 	@NotNull
 	@ManyToOne
 	private User user;
-//	@NotNull
-	@ManyToOne
-	@JsonIgnore
+	
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Dive dive;
-	@OneToMany(mappedBy = "fisher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "fisher", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<FishProduction> fishProductions;
 	
 	public Fisher() {}
@@ -73,7 +77,19 @@ public class Fisher {
 	}
 
 	@Override
-	public String toString() {
-		return "Fisher [id=" + id + ", user=" + user + ", dive=" + dive + ", fishProductions=" + fishProductions + "]";
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fisher other = (Fisher) obj;
+		return Objects.equals(id, other.id);
 	}
 }

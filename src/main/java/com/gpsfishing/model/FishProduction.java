@@ -2,8 +2,10 @@ package com.gpsfishing.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.micronaut.core.annotation.Nullable;
 
@@ -23,16 +25,20 @@ public class FishProduction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@ManyToOne
+	
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Fisher fisher;
+	
 	@NotNull
 	@ManyToOne
-	@JsonIgnore
 	private Fish fish;
-//	@NotNull
+	
+	@NotNull
 	private Integer weigth;
+	
 	@Nullable
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<User> userSawns = new ArrayList<>();
 	
 	public FishProduction() {}
@@ -86,6 +92,23 @@ public class FishProduction {
 		this.userSawns = userSawns;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FishProduction other = (FishProduction) obj;
+		return Objects.equals(id, other.id);
+	}
+
 //	public Integer getScore() {
 //		if(weigth >= fish.getInitialScore()) {
 //			if(userSawns.size() == 0) {
@@ -97,4 +120,6 @@ public class FishProduction {
 //			return 0;
 //		}
 //	}
+	
+	
 }
