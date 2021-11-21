@@ -19,8 +19,6 @@ import io.micronaut.core.annotation.Nullable;
 
 @Entity
 public class FisherProduction {
-//	private static final double CATCH_POINTS = 1000;
-//	private static final double SAWN_PERCENT = 0.30;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +34,8 @@ public class FisherProduction {
 	
 	@NotNull
 	private Integer weigth;
+	@NotNull
+	private Integer score = 0;
 	
 	@Nullable
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -43,12 +43,14 @@ public class FisherProduction {
 	
 	public FisherProduction() {}
 
-	public FisherProduction(Long id, Fisher fisher, @NotNull Fish fish, @NotNull Integer weigth, List<User> userSawns) {
+	public FisherProduction(Long id, Fisher fisher, @NotNull Fish fish, @NotNull Integer weigth, @NotNull Integer score,
+			List<User> userSawns) {
 		super();
 		this.id = id;
 		this.fisher = fisher;
 		this.fish = fish;
 		this.weigth = weigth;
+		this.score = score;
 		this.userSawns = userSawns;
 	}
 
@@ -83,6 +85,14 @@ public class FisherProduction {
 	public void setWeigth(Integer weigth) {
 		this.weigth = weigth;
 	}
+	
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
 
 	public List<User> getUserSawns() {
 		return userSawns;
@@ -91,25 +101,12 @@ public class FisherProduction {
 	public void setUserSawns(List<User> userSawns) {
 		this.userSawns = userSawns;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
-//	public double getScore() {
-//		
-//		if(weigth >= fish.getInitialScore()) {
-//			if(userSawns.size() == 0) {
-//				return weigth + CATCH_POINTS;
-//			} else {
-//				return (weigth * (1 - SAWN_PERCENT)) + CATCH_POINTS;
-//			}
-//		} else {
-//			return 0;
-//		}
-//	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
