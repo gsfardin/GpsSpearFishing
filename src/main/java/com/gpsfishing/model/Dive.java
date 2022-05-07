@@ -32,7 +32,7 @@ public class Dive {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@NotNull
-	@JsonFormat(pattern = "dd/mm/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dateDive;
 	@NotNull
 	@JsonFormat(pattern = "hh:mm")
