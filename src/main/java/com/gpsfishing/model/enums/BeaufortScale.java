@@ -14,7 +14,7 @@ public enum BeaufortScale {
 	DURO(9, "Duro", "Severe Gale"),
 	MUITO_DURO(10, "Muito Duro", "Storm"),
 	TEMPESTUOSO(11, "Tempestuoso", "Violent Storm"),
-	FURACAO(12, "Furacão", "Hurricane");
+	FURACAO(12, "Furacao", "Hurricane");
 	
 	private Integer code;
 	private String descriptionPtbr;
