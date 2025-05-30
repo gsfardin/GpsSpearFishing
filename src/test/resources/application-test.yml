@@ -1,4 +1,8 @@
-datasources:
-  default:
-    url: jdbc:tc:mysql:8:///db
-    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+micronaut:
+  server:
+    port: 3001
+
+#datasources:
+#  default:
+#    url: jdbc:tc:mysql:8:///db
+#    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver

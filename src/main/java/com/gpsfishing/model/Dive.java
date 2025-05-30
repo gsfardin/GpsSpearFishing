@@ -1,29 +1,18 @@
 package com.gpsfishing.model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gpsfishing.model.enums.BeaufortScale;
 import com.gpsfishing.model.enums.MoonPhase;
 import com.gpsfishing.model.enums.WindRose;
-
 import io.micronaut.core.annotation.Nullable;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Dive {
@@ -33,7 +22,7 @@ public class Dive {
 	private Long id;
 	@NotNull
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date dateDive;
+	private Timestamp dateDive;
 	@NotNull
 	@JsonFormat(pattern = "hh:mm")
 	private Timestamp initialDiveHour;
@@ -66,7 +55,7 @@ public class Dive {
 	
 	public Dive() {}
 
-	public Dive(Long id, @NotNull Date dateDive, @NotNull Timestamp initialDiveHour, @NotNull Timestamp finalDiveHour,
+	public Dive(Long id, @NotNull Timestamp dateDive, @NotNull Timestamp initialDiveHour, @NotNull Timestamp finalDiveHour,
 			@NotNull Integer visibility, Integer temperatura, @NotNull MoonPhase moonPhase,
 			@NotNull WindRose windDirection, @NotNull WindRose seaDirection, BeaufortScale seaCondition,
 			@NotNull FishingPlace fishingPlace, @NotNull List<Fisher> fishers) {
@@ -93,11 +82,11 @@ public class Dive {
 		this.id = id;
 	}
 
-	public Date getDateDive() {
+	public Timestamp getDateDive() {
 		return dateDive;
 	}
 
-	public void setDateDive(Date dateDive) {
+	public void setDateDive(Timestamp dateDive) {
 		this.dateDive = dateDive;
 	}
 
